@@ -39,7 +39,10 @@ router.post('/login', (req, res) => {
 });
 
 router.delete('/', (req, res) => {
-  req.session ? req.session.destroy():
+  req.session ? req.session.destroy(err => {
+    err ? res.send('error logging out'): 
+    res.send('good bye');
+  }):
   res.status(200).json({message: 'thanks for visiting!'})
 })
 
